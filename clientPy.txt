@@ -1,0 +1,12 @@
+import socket
+soc = socket.socket()
+host = socket.gethostname()
+port = 12345
+
+soc.connect((host, port))
+
+print soc.recv(1024)
+
+soc.close
+
+

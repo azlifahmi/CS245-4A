@@ -1,0 +1,32 @@
+import socket
+import RPi.GPIO as GPIO
+import time
+
+
+soc = socket.socket()
+host = socket.gethostname()
+port = 12345
+soc.bind((host, port))
+
+print"Waiting 4 connections!"
+
+soc.listen(5)
+while True:
+   c, addr = soc.accept()
+   print 'Got connection from', addr
+   c.send('Thank you for connecting')
+   print"LED ON"
+   GPIO.setmode(GPIO.BCM)
+   GPIO.setwarnings(False)
+   GPIO.setup(17,GPIO.OUT)
+
+   GPIO.output(17,GPIO.HIGH)
+   time.sleep(3)
+   print"\n LED OFF"
+   GPIO.output(17,GPIO.LOW)
+
+   c.shutdown(1)
+   c.close()
+
+
+
